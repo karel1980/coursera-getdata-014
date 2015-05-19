@@ -1,43 +1,90 @@
-# Description of the variables, data and transformations performed to clean up the data
+# CodeBook
 
-Most of the variable names shoud be clear from the r script. 
-The work is broken into a couple of functions to make things easier:
+The dataset used as input for the script is linked to in the readme. Please follow that link
+to get details on the original data.
 
-## load_subjects
+The dataset which can be produced by the run_analysis.R scriptwhich can be produced by the run_analysis.R scriptwhich can be produced by the run_analysis.R scriptwhich can be produced by the run_analysis.R script
 
-loads subject data from the subject_{test,train}.txt files
+## Groups
 
-## load_activities
+ * subject
+    A numeric value from 1 to 30 indentifying an indivitual
+ * activity
+    A factor variable identifying one of the measured activities (standing, laying, walking, walk down stairs, walk up stairs)
 
-loads subject data from the y_{test,train}.txt files
+## Measurement data
 
-## load_features
+Each subject performed various activities multiple times.
+Each (repetition of an) activity produced a series of single-valued descriptors were created (mean, std, skewness, ...). In our result we only worked with the mean and std values.
 
-loads measurement data from the X_{test,train}.txt files.
-To get meaningful column names we also use features.txt.
+The result contains the average of these mean and std values, grouped by subject and activity.
+The dots in the variable names can be ignored (they are a consequence of R not liking some symbols like brackets in dataframe columns).
 
-## run_analysis
+The full description of these variables can be derived from the original dataset, so we will omit it here.
 
-Here is where everything is put together:
-
-First we make sure the file is downloaded.
-
-Next we create df_all, a dataframe containing subject, activity and various mean and std variables.
-To do this we have helper methods (load_subjects, load_activities, load_features),
-each of which load a piece of the data. Using cbind, the data is joined column wise.
-Using rbind the test and train data are joined into one dataset.
-
-Then we select only the mean and std columns. This can be done in 2 ways:
-- by searching for 'mean' and 'std' in the column names or,
-- by loading the wanted columns from a file, which was created specially for this assignment
-(By copying features.txt and removing the lines which we did not want).
-I ended up choosing the latter method because it was easier to understand and maintain.
-
-Next we load the labels for the activities from activity_labels.txt.
-
-Finally we use the `aggregate` function to get the mean of the mean/std values,
-grouped by subject and activity and write out the result.
-
-The return value of run_analysis is the final dataframe with the grouped mean values,
-to allow further analysis.
-
+ * tBodyAcc.mean...X
+ * tBodyAcc.mean...Y
+ * tBodyAcc.mean...Z
+ * tBodyAcc.std...X
+ * tBodyAcc.std...Y
+ * tBodyAcc.std...Z
+ * tGravityAcc.mean...X
+ * tGravityAcc.mean...Y
+ * tGravityAcc.mean...Z
+ * tGravityAcc.std...X
+ * tGravityAcc.std...Y
+ * tGravityAcc.std...Z
+ * tBodyAccJerk.mean...X
+ * tBodyAccJerk.mean...Y
+ * tBodyAccJerk.mean...Z
+ * tBodyAccJerk.std...X
+ * tBodyAccJerk.std...Y
+ * tBodyAccJerk.std...Z
+ * tBodyGyro.mean...X
+ * tBodyGyro.mean...Y
+ * tBodyGyro.mean...Z
+ * tBodyGyro.std...X
+ * tBodyGyro.std...Y
+ * tBodyGyro.std...Z
+ * tBodyGyroJerk.mean...X
+ * tBodyGyroJerk.mean...Y
+ * tBodyGyroJerk.mean...Z
+ * tBodyGyroJerk.std...X
+ * tBodyGyroJerk.std...Y
+ * tBodyGyroJerk.std...Z
+ * tBodyAccMag.mean..
+ * tBodyAccMag.std..
+ * tGravityAccMag.mean..
+ * tGravityAccMag.std..
+ * tBodyAccJerkMag.mean..
+ * tBodyAccJerkMag.std..
+ * tBodyGyroMag.mean..
+ * tBodyGyroMag.std..
+ * tBodyGyroJerkMag.mean..
+ * tBodyGyroJerkMag.std..
+ * fBodyAcc.mean...X
+ * fBodyAcc.mean...Y
+ * fBodyAcc.mean...Z
+ * fBodyAcc.std...X
+ * fBodyAcc.std...Y
+ * fBodyAcc.std...Z
+ * fBodyAccJerk.mean...X
+ * fBodyAccJerk.mean...Y
+ * fBodyAccJerk.mean...Z
+ * fBodyAccJerk.std...X
+ * fBodyAccJerk.std...Y
+ * fBodyAccJerk.std...Z
+ * fBodyGyro.mean...X
+ * fBodyGyro.mean...Y
+ * fBodyGyro.mean...Z
+ * fBodyGyro.std...X
+ * fBodyGyro.std...Y
+ * fBodyGyro.std...Z
+ * fBodyAccMag.mean..
+ * fBodyAccMag.std..
+ * fBodyBodyAccJerkMag.mean..
+ * fBodyBodyAccJerkMag.std..
+ * fBodyBodyGyroMag.mean..
+ * fBodyBodyGyroMag.std..
+ * fBodyBodyGyroJerkMag.mean..
+ * fBodyBodyGyroJerkMag.std..

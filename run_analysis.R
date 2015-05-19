@@ -52,7 +52,7 @@ run_analysis<-function() {
   # the columns already have descriptive names.
   
   # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-  result<-aggregate(df_sel[,3:ncol(df_sel)], FUN=mean, by=list(df_sel$subject,df_sel$activity))
+  result<-aggregate(df_sel[,3:ncol(df_sel)], FUN=mean, by=list(subject=df_sel$subject,activity=df_sel$activity))
   
   # (6. write the result)
   write.table(result, 'getdata-014-karelvervaeke-result.txt', row.name=FALSE)
